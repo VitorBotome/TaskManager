@@ -15,4 +15,17 @@ public class TaskRepository
     {
         return _tasks;
     }
+
+    public static TaskModel? GetTaskById(Guid id)
+    {
+        return _tasks.Find(task => task.Id == id);
+    }
+    public static void UpdateTask()
+    {
+        
+    }
+    public static void Delete(TaskModel task)
+    {
+        _tasks.Remove(task);
+    }
 }
