@@ -1,5 +1,6 @@
 ﻿using Task.Application.Data;
 using Task.Application.Entities;
+using Task.Application.UseCases.TaskValidator;
 using Task.Communication.Requests;
 using Task.Communication.Responses;
 
@@ -9,14 +10,23 @@ public class RegisterTaskUseCase
 {
     public ResponseRegisterTaskJson Execute(RequestRegisterTaskJson request)
     {
+
+        ValidateTask.ValidatePriority(request.Priority);
+        ValidateTask.ValidateStatus(request.Status);
+
+        if (request.DueDate.Date <= DateTime.UtcNow.Date) //verifica se a data e maior que a data atual
+        {
+            throw new ArgumentException("A data deve ser futura");
+        }
+
         var task = new TaskModel
         {
             Id = Guid.NewGuid(),
-            name = request.name,
-            description = request.description,
-            priority = request.priority,
-            dueDate = request.dueDate,
-            status = request.status,
+            Name = request.Name,
+            Description = request.Description,
+            Priority = request.Priority,
+            DueDate = request.DueDate,
+            Status = request.Status,
         };
 
         TaskRepository.Add(task);
@@ -24,11 +34,11 @@ public class RegisterTaskUseCase
         return new ResponseRegisterTaskJson
         {
             Id = task.Id,
-            name = task.name,
-            description = task.description,
-            priority = task.priority,
-            dueDate = task.dueDate,
-            status = task.status,
+            Name = task.Name,
+            Description = task.Description,
+            Priority = task.Priority,
+            DueDate = task.DueDate,
+            Status = task.Status,
         };
     }
 }

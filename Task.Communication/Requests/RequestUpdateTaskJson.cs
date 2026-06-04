@@ -7,10 +7,10 @@ public class RequestUpdateTaskJson
 {
     [Required(ErrorMessage = "O nome da Tarefa é obrigatório.")]
     [MaxLength(100, ErrorMessage = "O nome não pode ter mais de 100 caracteres.")]
-    public string name { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     [MaxLength(500, ErrorMessage = "A descrição não pode ter mais que 500 caracteres.")]
-    public string? description { get; set; }
-    public TaskPriorityEnum priority { get; set; }
-    public DateTime dueDate { get; set; }
-    public TaskStatusEnum status { get; set; }
+    public string? Description { get; set; }
+    public TaskPriorityEnum Priority { get; set; }
+    public DateTime DueDate { get; set; }
+    public TaskStatusEnum Status { get; set; }
 }

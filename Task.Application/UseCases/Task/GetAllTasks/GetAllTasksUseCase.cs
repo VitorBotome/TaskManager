@@ -11,11 +11,11 @@ public class GetAllTasksUseCase
 
         return tasks.Select(task => new ResponseShortTaskJson
         {
-            name = task.name,
-            description = task.description,
-            priority = task.priority,
-            dueDate = task.dueDate,
-            status = task.status
+            Name = task.Name,
+            Description = task.Description,
+            Priority = task.Priority,
+            DueDate = task.DueDate,
+            Status = task.Status
         }).ToList();
     }
 }

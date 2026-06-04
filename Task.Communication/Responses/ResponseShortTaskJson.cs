@@ -4,10 +4,10 @@ namespace Task.Communication.Responses;
 
 public class ResponseShortTaskJson
 {
-    public string name { get; set; } = string.Empty;
-    public string description { get; set; } = string.Empty;
-    public TaskPriorityEnum priority { get; set; }
-    public DateTime dueDate { get; set; }
-    public TaskStatusEnum status { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public TaskPriorityEnum Priority { get; set; }
+    public DateTime DueDate { get; set; }
+    public TaskStatusEnum Status { get; set; }
 }
 

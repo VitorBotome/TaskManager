@@ -18,8 +18,15 @@ public class TaskController : ControllerBase
     [ProducesResponseType(typeof(ResponseErroJson), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestRegisterTaskJson request)
     {
-        var response = new RegisterTaskUseCase().Execute(request);
-        return Created(string.Empty, response);
+        try
+        {
+            var response = new RegisterTaskUseCase().Execute(request);
+            return Created(string.Empty, response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new ResponseErroJson { Errors = new List<string> { ex.Message } });
+        }
     }
 
     [HttpGet]
@@ -43,14 +50,20 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public IActionResult GetTaskById([FromRoute]Guid id)
     {
-        var useCase = new GetTaskByidUseCase();
-        var response = useCase.Execute(id);
-
-        if (response == null)
+        try
         {
-            return NoContent();
+            var useCase = new GetTaskByidUseCase();
+            var response = useCase.Execute(id);
+
+            if (response == null)
+                return NoContent();
+
+            return Ok(response);
         }
-        return Ok(response);
+        catch (ArgumentException ex)
+        {
+            return NotFound(new ResponseErroJson { Errors = new List<string> { ex.Message } });
+        }
     }
 
     [HttpPut]

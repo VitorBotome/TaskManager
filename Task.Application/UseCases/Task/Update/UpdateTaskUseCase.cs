@@ -15,11 +15,11 @@ public class UpdateTaskUseCase
             throw new ArgumentException($"Task nao encontrada");
         }
 
-        task.name = request.name;
-        task.description = request.description;
-        task.priority = request.priority;
-        task.dueDate = request.dueDate;
-        task.status = request.status;
+        task.Name = request.Name;
+        task.Description = request.Description;
+        task.Priority = request.Priority;
+        task.DueDate = request.DueDate;
+        task.Status = request.Status;
 
         TaskRepository.UpdateTask();
     }
